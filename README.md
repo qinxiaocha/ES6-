@@ -195,3 +195,58 @@ for (let [index, elem] of ['a', 'b'].entries()) {
 // 0 "a"
 // 1 "b"
 ```
+- 新增数组推导的写法，用于快捷地从当前数组生成指定数组（ES5中可以使用map()和filter()实现）：
+
+```
+//ES5:
+var a1 = [1, 2, 3, 4];
+var a2 = a1.map(function(i){return i * 2});
+var a3 = a1.filter(function(i){return i > 2});
+var a4 = a1.filter(function(i){return i > 2})
+           .map(function(i){return i * 2});
+a2 // [2, 4, 6, 8]
+a3 // [3, 4]
+a4 // [6,8]
+
+//ES6:
+var a1 = [1, 2, 3, 4];
+var a2 = [for (i of a1) i * 2];
+var a3 = [for (i of a1) if (i > 2) i];
+var a4 = [for (i of a1) if (i > 2) i * 2];//同时实现ES5中的map和filter 
+
+a2 // [2, 4, 6, 8]
+a3 // [3, 4]
+a4 // [6,8]
+
+```
+- 新增方法Array.observe()和Array.unobserve()方法用于监听（取消监听）数组的变化（包括add,update,delete,splice四种操作引起的数组变化）
+### 对象的扩展
+
+- 新增简洁的对象属性写法：
+
+```
+function f( x, y ) {
+  return { x, y, method(){return 1;}};
+}
+
+// 等同于
+
+function f( x, y ) {
+  return { x: x, y: y, method: function(){return 1}};
+}
+```
+
+- 允许在定义字面量对象时，使用表达式作为对象的属性名，通过把表达式放在方括号内:
+
+```
+let propKey = 'foo';
+
+let obj = {
+   [propKey]: true,
+   ['a'+'bc']: 123,
+   ['h'+'ello'](){return 'hi';} 
+};
+```
+
+- 新增Object.is()方法。用于比较两个值是否严格相等，相对于运算符===有两个不同：一是+0不等于-0，二是NaN等于自身。
+- 新增Object.assign()方法。将源对象（第一个参数后的所有参数）的所有可枚举属性复制到目标对象（第一个参数），后面的属性值会覆盖前面的同名属性。可用于：
