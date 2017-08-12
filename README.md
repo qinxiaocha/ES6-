@@ -127,3 +127,14 @@ $("#result").append(`
   are on sale!
 `);
 ```
+### 数值扩展
+
+- ES6提供了新的表示二进制和八进制数据的写法，二进制用前缀0b表示，八进制用前缀0o表示。新的八进制表示方法弥补了ES5中前缀0写法存在的问题。
+
+```
+0b111110111 === 503 // true
+0o767 === 503 // true
+```
+
+- ES6将ES5中的全局方法：isFinite(),isNaN(),parseInt(), parseFloat()移至Number上，分别变为Number.isFinite(),Number.isNaN(),Number.parseInt(), Number.parseFloat()。这样做是为了逐步减少全局方法，使语言逐步模块化。
+- Math对象新增的方法:
