@@ -1,3 +1,4 @@
+(ES6学习笔记)[http://imweb.io/topic/5548995d9615e51472f38ac6]
 # ES6-
 本文作者：IMWeb coolriver 原文出处：IMWeb社区 未经同意，禁止转载
 
