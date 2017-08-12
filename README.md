@@ -33,12 +33,33 @@ for (let i = 0;i < 10;i++){
 }
 ```
 - 需要注意的是，ES6中函数本身的作用域在其块级作用域之类（相当于使用let声明了），这样，在if条件内声明的函数就不会像ES5因函数提升而总会被声明。
+
 ### const声明常量
-    ES6中可以使用const关键字来声明常量，被声明的常量不能被修改。与使用let声明的变量类似，const声明的常量为块级作用域，不存在变量提升，且不可重复声明。
+   ES6中可以使用const关键字来声明常量，被声明的常量不能被修改。与使用let声明的变量类似，const声明的常量为块级作用域，不存在变量提升，且不可重复声明。
 　　const只限定就是所以的地址不能改变，意味着如果声明的目标为对象，那么对象的属性是可以修改的。书中建议如果要使对象为常量的话可以配合Object.freeze()函数来实现:
- ```
-  const foo = Object.freeze({a:1});
+```
+const foo = Object.freeze({a:1});
 
 //foo = {b:2} 无法修改foo
 //foo.a = 2   无法修改foo.a
+```
+以上方法中的Object.freeze()函数本身有局限性，它只能冻结对象的属性不被修改，并不能冻结它的属性的属性被修改。如果要实现将对象内部所有属性冻结，需要使用自定义的强化的冻结函数。关于深度冻结对象的方法在codewars上的一个题目有描述，具体方案如下：
+
+```
+Object.deepFreeze = function (object) {
+    Object.freeze(object);
+    Object.keys(object).forEach(function(key) { 
+        if(typeof(object[key]) == 'object') 
+        return Object.deepFreeze(object[key]); 
+    });
+}
+```
+　　　通过以上deepFreeze即可实现完全将对象常量化。效果如下：
+
+```
+const foo = Object.freeze({a:[1]}); //使用原始的冻结函数
+foo.a.push(2); //本操作可以使foo.a变为[1,2]
+
+const foo2 = Object.deepFreeze({a:[1]}); //使用深度冻结函数
+foo2.a.push(2); //本操作无法改变foo2.a
 ```
