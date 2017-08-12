@@ -65,3 +65,36 @@ foo.a.push(2); //本操作可以使foo.a变为[1,2]
 const foo2 = Object.deepFreeze({a:[1]}); //使用深度冻结函数
 foo2.a.push(2); //本操作无法改变foo2.a
 ```
+### 全局对象属性
+　　全局对象是最顶层的对象，在浏览器环境指的是window对象，在Node.js指的是global对象。ES5规定，所有全局变量都是全局对象的属性。
+　　ES6规定，var命令和function命令声明的全局变量，属于全局对象的属性；let命令、const命令、class命令声明的全局变量，不属于全局对象的属性。
+### 变量的解构赋值
+　　ES6中新增了一种赋值方法，可以批量地从对象（或数组）中提取出相应的值赋值到一组对应的变量上。下面为数组形式的解构赋值:
+```
+//数组的解构赋值
+var [a,b,c] = [1,2,3];
+
+//相当于
+var a = 1,b = 2,c = 3;
+```
+　　下面为对象形式的解构赋值:
+```
+//对象的解构赋值方式一
+var {bar, foo} = {foo: "aaa", bar: "bbb"};
+foo //"aaa"
+bar //"bbb"
+
+//对象的解构赋值方式二
+var {first: f, last: l} = {first: "hello", last: "world"};
+f //"hello"
+l //"world"
+```
+解构赋值可以带来很多便利：
+
+- 变量交换 ：[x, y] = [y, x]
+- 函数返回多个值赋值给多个变量
+- 可以方便地将一组参数与变量名对应起来。
+- 方便提取JSON数据
+- 方便设置函数参数默认值。（解构赋值可以指定默认值）
+- 遍历Map：for (let [key, value] of map){}
+- 加载模块时指定需要加载的方法：const {SourceMapConstumer, SourceNode} = require("source-map")
