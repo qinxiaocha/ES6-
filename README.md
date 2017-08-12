@@ -98,3 +98,20 @@ l //"world"
 - 方便设置函数参数默认值。（解构赋值可以指定默认值）
 - 遍历Map：for (let [key, value] of map){}
 - 加载模块时指定需要加载的方法：const {SourceMapConstumer, SourceNode} = require("source-map")
+### 字符串扩展
+
+- ES6中提供了一级新的方法来解决ES5里某些中文字符（UTF-16编码大于0XFFFF）编码的问题。另外ES5中使用码点"\uXXXX"来表示字符的方法不能表示大于0XFFFF的字符，在ES6中可以使用大括号将码点括起来就可以表示大于0XFFFF的字符："\u{XXXX}"。
+- ES6对正则表达式添加了u修饰符，用来正确处理大于\uFFFF的Unicode字符。点（.）字符在正则表达式中，解释为除了换行以外的任意单个字符。对于码点大于0xFFFF的Unicode字符，点字符不能识别，必须加上u修饰符：
+
+```
+var s = "𠮷";
+
+/^.$/.test(s) // false
+/^.$/u.test(s) // true
+```
+*传统上，JavaScript只有indexOf方法，可以用来确定一个字符串是否包含在另一个字符串中。ES6又提供了三种新方法。
+
+- [ ] includes()：返回布尔值，表示是否找到了参数字符串.
+- [ ] startsWith()：返回布尔值，表示参数字符串是否在源字符串的头部.
+- [ ] endsWith()：返回布尔值，表示参数字符串是否在源字符串的尾部.
+- [ ] repeat()返回一个新字符串，表示将原字符串重复n次。可以方便地构建由重复字符或字符串构成的字符串：
