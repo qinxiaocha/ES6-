@@ -115,3 +115,15 @@ var s = "𠮷";
 - [ ] startsWith()：返回布尔值，表示参数字符串是否在源字符串的头部.
 - [ ] endsWith()：返回布尔值，表示参数字符串是否在源字符串的尾部.
 - repeat()返回一个新字符串，表示将原字符串重复n次。可以方便地构建由重复字符或字符串构成的字符串：
+```
+"x".repeat(3) // "xxx"
+"hello".repeat(2) // "hellohello"
+```
+字符串模板。模板字符串用``进行定义，中间使用到的变量值使用${}进行嵌入。使用字符串模板可以很方便地将变量与字符串结合，而不用使用大量的加号进行拼接：
+```
+$("#result").append(`
+  There are ${basket.count} items
+   in your basket,${basket.onSale}
+  are on sale!
+`);
+```
