@@ -154,3 +154,43 @@ $("#result").append(`
 - [ ] Math.log10(x) 返回以10为底的x的对数
 - [ ] Math.log2(x) 返回以2为底的x的对数
 - [ ] Math.tanh(x) 返回x的双曲正切（hyperbolic tangent)
+### 数组的扩展
+
+- 新增方法Array.from()，可以将类数组对象（例如函数中的arguments）和遍历对象（如ES6中的Map和Set对象）。该函数可以方便地替代ES5中使用Array.prototype.slice来进行数组转换。
+- 新增方法Array.of()，用来将一组值转换为数组。该函数主要用于解决ES5中使用Array()构造数组的不足（因为参数个数的不同导致构造行为的不同）：
+
+```
+//ES5:
+Array() // []
+Array(3) // [undefined, undefined, undefined]
+Array(3,11,8) // [3, 11, 8]
+
+//ES6:
+Array.of(3, 11, 8) // [3,11,8]
+Array.of(3) // [3]
+Array.of(3).length // 1
+
+```
+- 新增数组实例方法：find()和findIndex()。两者的参数都是一个回调函数，返回第一个回调函数返回值为true的元素的值（或下标）。这两个函数解决了ES5中indexOf()函数不能找到NaN元素的问题。
+- 新增数组实例方法：fill(),使用指定值对数组进行填充。参数为一个时将数组所有元素替换为参数的值，参数为三个时，将指定起始位置（第二个参数）和终止位置（第三个参数）替换为目标值（第一个参数）
+- 新增数组实例方法：ectries(),keys(),values(),三个都返回遍历器：
+
+```
+for (let index of ['a', 'b'].keys()) {
+  console.log(index);
+}
+// 0
+// 1
+
+for (let elem of ['a', 'b'].values()) {
+  console.log(elem);
+}
+// 'a'
+// 'b'
+
+for (let [index, elem] of ['a', 'b'].entries()) {
+  console.log(index, elem);
+}
+// 0 "a"
+// 1 "b"
+```
